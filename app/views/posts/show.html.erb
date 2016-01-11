@@ -10,9 +10,9 @@
     <% end %>
   </p>
 
-  <p class="body">
-    <%= @post.body %>
-  </p>
+  <div class="body froala-view">
+      <%= simple_format(@post.body) %>
+  </div>
 
 
   <div id="comments">

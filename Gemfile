@@ -46,3 +46,7 @@ group :development do
 end
 
 gem 'devise', '~> 3.5.2'
+gem "wysiwyg-rails"
+gem 'font-awesome-rails'
+#gem 'carrierwave'
+#gem 'mini_magick'
