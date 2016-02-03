@@ -1,25 +1,26 @@
 <div id="post_content">
+    <div class="user">
+      <%= @post.user.email %>
+      <p class="date">
+        Submitted <%= time_ago_in_words(@post.created_at) %> Ago
+        <% if user_signed_in? %>
+          | <%= link_to 'Edit', edit_post_path(@post) %>  | <%= link_to 'Delete', post_path(@post), method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% end %>
+      </p>
+    </div>
+
     <h1 class="title">
       <%= @post.title %>
     </h1>
-
-  <p class="date">
-    Submitted <%= time_ago_in_words(@post.created_at) %> Ago
-    <% if user_signed_in? %>
-      | <%= link_to 'Edit', edit_post_path(@post) %>  | <%= link_to 'Delete', post_path(@post), method: :delete, data: { confirm: 'Are you sure?' } %>
-    <% end %>
-  </p>
 
   <div class="body froala-view">
       <%= simple_format(@post.body) %>
   </div>
 
-
   <div id="comments">
     <h2><%= @post.comments.count %> Comments</h2>
     <%= render @post.comments %>
 
-    <h3>Add a comment:</h3>
     <%= render 'comments/form' %>
   </div>
 </div>

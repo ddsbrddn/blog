@@ -53,6 +53,12 @@
         <div class="buttons">
           <button class="button"><%= link_to "New Post", new_post_path %></button>
           <button class="button">Log Out</button>
+          <button class="button"><%= current_user.email %>       </button>
+        </div>
+      <% else %>
+        <div class="buttons">
+          <button class="button"><%= link_to "Sign up", new_user_registration_path %></button>
+          <button class="button"><%= link_to "Sign in", new_user_session_path %></button>
         </div>
       <% end %>
     </div>

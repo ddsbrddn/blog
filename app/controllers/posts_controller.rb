@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :require_permission, only: [:edit, :destroy]
+
   def index
     @posts = Post.all.order('created_at DESC')
   end
@@ -9,7 +11,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
+    @post = current_user.posts.build(post_params)
     if @post.save
       redirect_to @post
     else
@@ -45,5 +47,13 @@ class PostsController < ApplicationController
   private
   def post_params
     params.require(:post).permit(:title, :body)
+  end
+
+  def require_permission
+    if current_user != Post.find(params[:id]).user
+      redirect_to root_path
+      flash[:danger] = "require permission"
+
+    end
   end
 end
